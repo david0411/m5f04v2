@@ -13,25 +13,31 @@ function ForecastPage() {
     const [chartData, setChartData] = useState<ChartData[] | undefined>(undefined)
     const [updateTime, setUpdateTime] = useState<string | undefined>(undefined)
 
-    const getDataFromApi = async () => {
-        setUpdateTime(undefined);
-        setForecastData(undefined);
-        setChartData(undefined);
-        const result = await ForecastWeatherApi.getForecastWeather()
-        setUpdateTime(moment().format("DD-MM-YYYY HH:mm:ss"));
-        setForecastData(result);
-        setChartData(result?.list.map(value => (
-                {
-                    name: moment.unix(value.dt).format("DD-MM-YYYY HH:mm:ss"),
-                    temperature: value.main.temp,
-                    humidity: value.main.humidity
-                }
-            )
-        ))
+    const getDataFromApi = async ():Promise<void> => {
+        try {
+            setUpdateTime(undefined);
+            setForecastData(undefined);
+            setChartData(undefined);
+
+            const result = await ForecastWeatherApi.getForecastWeather()
+            setUpdateTime(moment().format("DD-MM-YYYY HH:mm:ss"));
+            setForecastData(result);
+            setChartData(result?.list.map(value => (
+                    {
+                        name: moment.unix(value.dt).format("DD-MM-YYYY HH:mm:ss"),
+                        temperature: value.main.temp,
+                        humidity: value.main.humidity
+                    }
+                )
+            ))
+        }
+        catch (e)   {
+            console.error(e)
+        }
     }
 
     useEffect(() => {
-        getDataFromApi();
+        void getDataFromApi();
     }, []);
 
     return (

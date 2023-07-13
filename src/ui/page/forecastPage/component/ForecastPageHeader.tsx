@@ -20,7 +20,8 @@ function ForecastPageHeader(props: Props) {
                     }
                 </div>
                 <div className="emptySpace"></div>
-                <div id="reloadButton" onClick={props.getForecastData}></div>
+                {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
+                <div className="reloadButton" onClick={props.getForecastData}></div>
             </div>
         </div>
         <div className="headerStyle3">

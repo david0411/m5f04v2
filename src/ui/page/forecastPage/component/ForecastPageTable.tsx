@@ -11,8 +11,8 @@ type Props = {
 function ForecastPageTable(props: Props) {
     const renderForecastData = () =>    {
         if(props.forecastData)  {
-            return props.forecastData.list.map((value) =>
-                <ForecastPageTableRow data={value}/>)
+            return props.forecastData.list.map((value, index) =>
+                <ForecastPageTableRow key={index} data={value}/>)
         }   else    {
             return <ForecastPageTableLoading/>
         }
@@ -29,7 +29,7 @@ function ForecastPageTable(props: Props) {
                 <th>Weather</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody key="ForecastTable">
             {
                 renderForecastData()
             }

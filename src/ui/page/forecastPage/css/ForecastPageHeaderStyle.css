@@ -22,7 +22,7 @@
     width: 20px;
 }
 
-#reloadButton   {
+.reloadButton   {
     background-image: url("../img/sync.png");
     background-size: contain;
     background-color: #524d4d;
@@ -32,6 +32,6 @@
     border-radius: 50%
 }
 
-#reloadButton:hover {
+.reloadButton:hover {
     rotate: 90deg;
 }
